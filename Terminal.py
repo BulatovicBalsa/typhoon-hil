@@ -2,10 +2,11 @@ terminal_dictionary = {}
 
 
 class Terminal(object):
-    def __init__(self, trm_id, name, comp_parent=None):
+    def __init__(self, trm_id, name, direction, comp_parent=None):
         self._name = name
         self._id = trm_id
         self._comp_parent = comp_parent
+        self._direction = direction
         terminal_dictionary[self._id] = self
 
     @property
@@ -23,3 +24,7 @@ class Terminal(object):
     @property
     def id(self):
         return self._id
+
+    @property
+    def direction(self):
+        return self._direction

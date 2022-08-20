@@ -21,6 +21,14 @@ class Edge(object):
         elif self._origin == v:
             return self._destination
 
+    @property
+    def origin(self):
+        return self._origin
+
+    @property
+    def destination(self):
+        return self._destination
+
 
 class Graph(object):
     def __init__(self):
@@ -34,6 +42,14 @@ class Graph(object):
     @property
     def outgoing(self):
         return self._outgoing
+
+    @edges.setter
+    def edges(self, v):
+        self._edges = v
+
+    @outgoing.setter
+    def outgoing(self, v):
+        self._outgoing = v
 
     def incident_edges(self, v):
         for elem in self.edges:
@@ -90,12 +106,16 @@ class Graph(object):
         else:
             self._outgoing[v][u] = [terminal_v]
 
-    def dfs(self, v):
+    def set_labels(self):
         labels = {}
         for elem in self._outgoing:
             labels[elem] = "UNEXPLORED"
         for elem in self.edges:
             labels[elem] = "UNEXPLORED"
+        return labels
+
+    def dfs(self, v):
+        labels = self.set_labels()
         self._dfs(v, labels)
         return labels
 
@@ -109,6 +129,36 @@ class Graph(object):
                     self._dfs(w, labels)
                 else:
                     labels[elem] = "BACK"
+
+    def divide_by_sub_graphs(self):
+        labels = self.set_labels()
+        new_graphs_list = []
+        sub_graphs_parts = []
+        for vertex in self._outgoing:
+            if vertex in sub_graphs_parts:
+                continue
+            self._dfs(vertex, labels)
+            g = remove_explored(self, labels, sub_graphs_parts)
+            new_graphs_list.append(g)
+        return new_graphs_list
+
+
+def remove_explored(graph, labels, sgp_list):
+    g = Graph()
+    rem_list = []
+    for elem in labels:
+        if not labels[elem] == "UNEXPLORED":
+            if labels[elem] == "VISITED":
+                g.outgoing[elem] = graph.outgoing[elem]
+            else:
+                e = Edge(elem._origin, elem._destination)
+                g.edges.append(e)
+            sgp_list.append(elem)
+            rem_list.append(elem)
+
+    for elem in rem_list:
+        labels.pop(elem)
+    return g
 
 
 def get_components_by_dfs_state(graph, v, state):

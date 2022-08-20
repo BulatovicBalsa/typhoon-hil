@@ -6,7 +6,9 @@ import Graph
 
 def load_json():
     path = "./models/calc_value_not_used.json"
-    # path = "./models/eliminate_bus_join.json"
+    path = "./models/eliminate_bus_join.json"
+    path = "./models/known_values.json"
+    path = "./models/dedup.json"
     with open(path, 'r') as f:
         data = json.load(f)
 
@@ -40,7 +42,8 @@ def create_component(graf, comp_list, comp, comp_graph, has_parent):
     for terminal in comp["terminals"]:
         t_id = terminal['id']
         t_name = terminal['name']
-        new_trm = Terminal.Terminal(t_id, t_name)
+        t_direction = terminal['direction']
+        new_trm = Terminal.Terminal(t_id, t_name, t_direction)
         terminals.append(new_trm)
 
     new_comp = komponenta.Component(c_id, c_name, terminals, c_parent_id, c_type, comp_graph)
