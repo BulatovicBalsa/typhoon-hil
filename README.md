@@ -1,13 +1,13 @@
-# Graph_Validations
+# Graph Validations
 
-Graph_Validations is package that contains 
+Graph Validations is package that contains 
 functions for checking if Schematic Editor graphs contained in JSON file are built correctly
 
-Graph_Validations is fully implemented in Python.
+Graph Validations is fully implemented in Python.
 
 ## Installation
 
-You can use `pip` to install Graph_Validations:
+You can use `pip` to install Graph Validations:
 
 ```
 $ pip install graph_validations
