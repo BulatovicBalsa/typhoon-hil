@@ -13,7 +13,7 @@ You can use `pip` to install Graph Validations:
 $ pip install graph_validations
 ```
 
-To verify that you have installed Silvera correctly run the following command:
+To verify that you have installed Graph Validations correctly run the following command:
 
 ```
 $ graph_validations
