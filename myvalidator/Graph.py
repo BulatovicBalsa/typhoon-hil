@@ -1,4 +1,5 @@
-
+import myvalidator.komponenta as komponenta
+import myvalidator.Terminal as Terminal
 
 class Node(object):
     def __init__(self, component):
@@ -167,3 +168,23 @@ def get_components_by_dfs_state(graph, v, state):
         if labels[key] == state.upper():
             ret_list.append(key)
     return ret_list
+
+
+def get_near_constant(graph, cmp_id, container):
+    # for key in graph.outgoing[cmp_id].keys():
+    #     term_id = graph.outgoing[cmp_id][key][0]
+    #     term = Terminal.terminal_dictionary[term_id]
+    #     if "out" in term.name:
+    #         continue
+    #     if "Constant" in komponenta.component_dictionary[key].name:
+    #         return komponenta.component_dictionary[key]
+    #     return get_near_constant(graph, key, cmp_id)
+
+    for edge in graph.incident_edges(cmp_id):
+        w_id = edge.opposite(cmp_id)
+        if w_id not in container:
+            continue
+        if "Constant" in komponenta.component_dictionary[w_id].name:
+            return komponenta.component_dictionary[w_id]
+        return get_near_constant(graph, w_id, container)
+

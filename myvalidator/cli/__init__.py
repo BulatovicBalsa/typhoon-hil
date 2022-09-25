@@ -12,12 +12,13 @@ def cli(ctx, debug):
 
 
 @cli.command()
-@click.argument('file_path', type=click.Path(), required=True)
+@click.argument('json_path', type=click.Path(), required=True)
+@click.argument('tse_path', type=click.Path(), required=True)
 @click.argument('validator_name', required=True)
 @click.pass_context
-def validate_graph(ctx, file_path, validator_name):
+def validate_graph(ctx, json_path, tse_path, validator_name):
     """Checks if the given graph is valid."""
-    validate(file_path, validator_name)
+    validate(json_path, tse_path, validator_name)
 
 
 @cli.command()

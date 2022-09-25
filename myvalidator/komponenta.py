@@ -1,4 +1,5 @@
 component_dictionary = {}
+removed_components = []
 
 
 class Component(object):
